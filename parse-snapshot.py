@@ -1,6 +1,5 @@
 import json
 import os
-import sys
 from typing import Mapping
 from textwrap import dedent
 
@@ -9,7 +8,7 @@ def main() -> None:
     snapshot_str = os.environ.get("SNAPSHOT")
     if snapshot_str is None:
         raise RuntimeError("SNAPSHOT environment variable wasn't declared or empty")
-    snapshot: Mapping = json.load(sys.stdin)
+    snapshot: Mapping = json.loads(snapshot_str)
     components = snapshot.get("components")
     if not components:
         raise RuntimeError(f"No components found in SNAPSHOT: ${snapshot}")
